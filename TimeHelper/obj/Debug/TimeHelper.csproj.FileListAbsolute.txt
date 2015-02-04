@@ -1,0 +1,9 @@
+D:\Visual Studio Project\TimeHelper\TimeHelper\bin\Debug\TimeHelper.exe.config
+D:\Visual Studio Project\TimeHelper\TimeHelper\bin\Debug\TimeHelper.exe
+D:\Visual Studio Project\TimeHelper\TimeHelper\bin\Debug\TimeHelper.pdb
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.csprojResolveAssemblyReference.cache
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.Form1.resources
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.Properties.Resources.resources
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.csproj.GenerateResource.Cache
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.exe
+D:\Visual Studio Project\TimeHelper\TimeHelper\obj\Debug\TimeHelper.pdb
