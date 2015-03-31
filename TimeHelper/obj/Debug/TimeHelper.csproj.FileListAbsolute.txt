@@ -12,7 +12,6 @@ D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.exe
 D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.pdb
 D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\TimeHelper.exe
 D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\TimeHelper.pdb
-D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.csprojResolveAssemblyReference.cache
 D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.Properties.Resources.resources
 D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.csproj.GenerateResource.Cache
 D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\MetroFramework.Design.dll
