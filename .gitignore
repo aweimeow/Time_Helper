@@ -41,3 +41,21 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# C# Project file
+.csproj
+.ps1
+
+
+# Pass C# package file
+.dll
+.xml
+.nupkg
+
+# execute file
+.exe
+.pdb
+
+# Cache file
+.cache
+.Cache
