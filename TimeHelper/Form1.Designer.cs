@@ -29,12 +29,16 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			this.Timer_GetData = new System.Windows.Forms.Timer(this.components);
 			this.MTC = new MetroFramework.Controls.MetroTabControl();
 			this.TabPage_Main = new System.Windows.Forms.TabPage();
 			this.Chart_Main = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.TabPage_TODO = new System.Windows.Forms.TabPage();
+			this.Btn_addtodo = new System.Windows.Forms.Button();
+			this.TB_addtodo = new System.Windows.Forms.TextBox();
+			this.lbl_addtodo = new System.Windows.Forms.Label();
+			this.CLB_TODO = new System.Windows.Forms.CheckedListBox();
 			this.TabPage_Setting = new System.Windows.Forms.TabPage();
 			this.GB_AutoUpdate = new System.Windows.Forms.GroupBox();
 			this.RB_AutoUpdateSlow = new System.Windows.Forms.RadioButton();
@@ -60,13 +64,14 @@
 			this.MTC.SuspendLayout();
 			this.TabPage_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Chart_Main)).BeginInit();
+			this.TabPage_TODO.SuspendLayout();
 			this.TabPage_Setting.SuspendLayout();
 			this.GB_AutoUpdate.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// Timer_GetData
 			// 
-			this.Timer_GetData.Interval = 60000;
+			this.Timer_GetData.Interval = 1000;
 			this.Timer_GetData.Tick += new System.EventHandler(this.Timer_GetData_Tick);
 			// 
 			// MTC
@@ -78,7 +83,7 @@
 			this.MTC.FontSize = MetroFramework.MetroTabControlSize.Tall;
 			this.MTC.Location = new System.Drawing.Point(16, 58);
 			this.MTC.Name = "MTC";
-			this.MTC.SelectedIndex = 2;
+			this.MTC.SelectedIndex = 1;
 			this.MTC.Size = new System.Drawing.Size(607, 596);
 			this.MTC.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.MTC.TabIndex = 0;
@@ -99,8 +104,8 @@
 			// 
 			// Chart_Main
 			// 
-			chartArea2.Name = "ChartArea1";
-			this.Chart_Main.ChartAreas.Add(chartArea2);
+			chartArea1.Name = "ChartArea1";
+			this.Chart_Main.ChartAreas.Add(chartArea1);
 			this.Chart_Main.Location = new System.Drawing.Point(10, 10);
 			this.Chart_Main.Name = "Chart_Main";
 			this.Chart_Main.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
@@ -110,11 +115,51 @@
 			// TabPage_TODO
 			// 
 			this.TabPage_TODO.BackColor = System.Drawing.Color.White;
+			this.TabPage_TODO.Controls.Add(this.Btn_addtodo);
+			this.TabPage_TODO.Controls.Add(this.TB_addtodo);
+			this.TabPage_TODO.Controls.Add(this.lbl_addtodo);
+			this.TabPage_TODO.Controls.Add(this.CLB_TODO);
 			this.TabPage_TODO.Location = new System.Drawing.Point(4, 44);
 			this.TabPage_TODO.Name = "TabPage_TODO";
 			this.TabPage_TODO.Size = new System.Drawing.Size(599, 548);
 			this.TabPage_TODO.TabIndex = 2;
 			this.TabPage_TODO.Text = "待辦事項";
+			// 
+			// Btn_addtodo
+			// 
+			this.Btn_addtodo.Location = new System.Drawing.Point(484, 8);
+			this.Btn_addtodo.Name = "Btn_addtodo";
+			this.Btn_addtodo.Size = new System.Drawing.Size(100, 38);
+			this.Btn_addtodo.TabIndex = 8;
+			this.Btn_addtodo.Text = "add";
+			this.Btn_addtodo.UseVisualStyleBackColor = true;
+			this.Btn_addtodo.Click += new System.EventHandler(this.Btn_addtodo_Click);
+			// 
+			// TB_addtodo
+			// 
+			this.TB_addtodo.Location = new System.Drawing.Point(180, 7);
+			this.TB_addtodo.Name = "TB_addtodo";
+			this.TB_addtodo.Size = new System.Drawing.Size(295, 39);
+			this.TB_addtodo.TabIndex = 7;
+			// 
+			// lbl_addtodo
+			// 
+			this.lbl_addtodo.AutoSize = true;
+			this.lbl_addtodo.Location = new System.Drawing.Point(22, 12);
+			this.lbl_addtodo.Name = "lbl_addtodo";
+			this.lbl_addtodo.Size = new System.Drawing.Size(154, 30);
+			this.lbl_addtodo.TabIndex = 6;
+			this.lbl_addtodo.Text = "New TODO: ";
+			// 
+			// CLB_TODO
+			// 
+			this.CLB_TODO.Font = new System.Drawing.Font("微軟正黑體", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+			this.CLB_TODO.FormattingEnabled = true;
+			this.CLB_TODO.Location = new System.Drawing.Point(17, 60);
+			this.CLB_TODO.Name = "CLB_TODO";
+			this.CLB_TODO.Size = new System.Drawing.Size(567, 444);
+			this.CLB_TODO.TabIndex = 4;
+			this.CLB_TODO.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CLB_TODO_ItemCheck);
 			// 
 			// TabPage_Setting
 			// 
@@ -376,6 +421,8 @@
 			this.MTC.ResumeLayout(false);
 			this.TabPage_Main.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Chart_Main)).EndInit();
+			this.TabPage_TODO.ResumeLayout(false);
+			this.TabPage_TODO.PerformLayout();
 			this.TabPage_Setting.ResumeLayout(false);
 			this.TabPage_Setting.PerformLayout();
 			this.GB_AutoUpdate.ResumeLayout(false);
@@ -413,6 +460,10 @@
 		private System.Windows.Forms.RadioButton RB_AutoUpdateSlow;
 		private System.Windows.Forms.RadioButton RB_AutoUpdateFast;
 		private System.Windows.Forms.TabPage TabPage_TODO;
+		private System.Windows.Forms.CheckedListBox CLB_TODO;
+		private System.Windows.Forms.Button Btn_addtodo;
+		private System.Windows.Forms.TextBox TB_addtodo;
+		private System.Windows.Forms.Label lbl_addtodo;
 	}
 }
 

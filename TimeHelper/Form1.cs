@@ -59,6 +59,14 @@ namespace TimeHelper
 			public String AppName { get; set; }
 			public int Count { get; set; }
 		}
+		public class TodoData
+		{
+			// TODO List's data structure
+			public int id { get; set; }
+			public String name { get; set; }
+			public DateTime date { get; set; }
+			public Boolean is_done { get; set; }
+		}
 		#endregion
 		#region Global Variable
 		HookFunction hook = new HookFunction();
@@ -69,6 +77,7 @@ namespace TimeHelper
 		private List<ChartData> StaticsData = new List<ChartData>();//A List to Count the mount of APP's use
 		private int LogDataIndex = -1;	//紀錄Log<List>內中的索引
 		private int fileLine = -1;		//紀錄目前log檔內已經寫了幾行
+		private List<TodoData> todolist = new List<TodoData>(); // Record now's todo data
 		#endregion
 		public Form1()
 		{
@@ -113,6 +122,16 @@ namespace TimeHelper
 			if (path.SelectedPath != String.Empty)
 				Btn_LogLoc.Text = path.SelectedPath + "\\TimeHelper.log";
 		}
+		private void Btn_addtodo_Click(object sender, EventArgs e)
+		{
+			TodoData todo = new TodoData();
+			todo.id = CLB_TODO.Items.Count;
+			todo.name = TB_addtodo.Text;
+			todo.date = DateTime.Now;
+			todo.is_done = false;
+			todolist.Add(todo);
+			flushTODOList();
+		}
 		private void MTC_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (MTC.SelectedIndex == 0)
@@ -125,6 +144,23 @@ namespace TimeHelper
 			}
 		}
 		
+		#endregion
+		#region TODO List Function
+		private void flushTODOList()
+		{
+			CLB_TODO.Items.Clear();
+			foreach(TodoData todo in todolist)
+			{
+				CLB_TODO.Items.Add(todo.name);
+			}
+		}
+
+		private void CLB_TODO_ItemCheck(object sender, ItemCheckEventArgs e)
+		{
+			for(int i = 0; i < CLB_TODO.Items.Count; i++)
+			{
+			}
+		}
 		#endregion
 		#region Timer Tick Region
 		private void Timer_GetData_Tick(object sender, EventArgs e)
@@ -546,6 +582,9 @@ namespace TimeHelper
 			}
 		}
 		#endregion
+
+
+
 	}
 	#region WinAPI - Get Top Windows Name
 	public class HookFunction
