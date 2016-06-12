@@ -19,3 +19,4 @@ D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\MetroFramework.dll
 D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\MetroFramework.Fonts.dll
 D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.Form1.resources
 D:\Visual Studio Project\Time_Helper\TimeHelper\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio Project\Time_Helper\TimeHelper\obj\Debug\TimeHelper.csprojResolveAssemblyReference.cache
