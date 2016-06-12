@@ -43,19 +43,24 @@ Temporary Items
 .apdisk
 
 # C# Project file
-.csproj
-.ps1
+*.csproj
+*.ps1
 
 
 # Pass C# package file
-.dll
-.xml
-.nupkg
+*.dll
+*.xml
+*.nupkg
 
 # execute file
-.exe
-.pdb
+*.exe
+*.pdb
 
 # Cache file
-.cache
-.Cache
+*.cache
+*.Cache
+*.manifest
+*.config
+TimeHelper/obj/Debug/TimeHelper.csproj.FileListAbsolute.txt
+*.suo
+*.log
