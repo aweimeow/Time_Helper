@@ -130,6 +130,7 @@ namespace TimeHelper
 			TodoData todo = new TodoData();
 			todo.id = CLB_TODO.Items.Count;
 			todo.name = TB_addtodo.Text;
+			TB_addtodo.Text = String.Empty;
 			todo.date = DateTime.Now;
 			todo.is_done = false;
 			todolist.Add(todo);
@@ -155,15 +156,69 @@ namespace TimeHelper
 			foreach(TodoData todo in todolist)
 			{
 				CLB_TODO.Items.Add(todo.name);
+				if (todo.is_done)
+					CLB_TODO.SetItemChecked(CLB_TODO.Items.Count - 1, true);
 			}
+			WriteTodo(todolist);
 		}
 
 		private void CLB_TODO_ItemCheck(object sender, ItemCheckEventArgs e)
 		{
-			for(int i = 0; i < CLB_TODO.Items.Count; i++)
+			foreach(object i in CLB_TODO.SelectedItems)
 			{
+				todolist[CLB_TODO.Items.IndexOf(i)].is_done = true;
+			}
+			WriteTodo(todolist);
+		}
+		private void WriteTodo(List<TodoData> todolist)
+		{
+			String todoData = JsonConvert.SerializeObject(todolist);
+			String StrToHash = todoData + "aweimeow", hashResult;
+			using (MD5 md5Hash = MD5.Create())
+			{
+				hashResult = GetMd5Hash(md5Hash, StrToHash);
+			}
+			String WriteInData = todoData + "@" + hashResult;
+			String path = System.Windows.Forms.Application.StartupPath;
+			path = path + "\\todo.log";
+			StreamWriter sw = new StreamWriter(path, false);
+			sw.Write(WriteInData);
+			sw.Close();
+		}
+		private void OpenTodo()
+		{
+			String path = System.Windows.Forms.Application.StartupPath;
+			path = path + "\\todo.log";
+			String[] ReadOutData = new String[2];
+			if (File.Exists(path))
+			{
+				StreamReader sr = new StreamReader(path);
+				try
+				{
+					ReadOutData = sr.ReadLine().Split('@');
+				}
+				catch (Exception)
+				{
+					MetroFramework.MetroMessageBox.Show(this, "\n不要任意改動 todo list 的 log 唷 >_^", "記錄檔無效", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					File.Delete(path);
+				}
+				sr.Close();
+				using (MD5 md5Hash = MD5.Create())
+				{
+					if (VerifyMd5Hash(md5Hash, ReadOutData[0] + "aweimeow", ReadOutData[1]))
+					{
+						todolist = JsonConvert.DeserializeObject<List<TodoData>>(ReadOutData[0]);
+						flushTODOList();
+					}
+					else
+					{
+						MetroFramework.MetroMessageBox.Show(this, "\n不要任意改動 todo list 的 log 唷 >_^", "紀錄檔無效", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						File.Delete(path);
+					}
+				}
 			}
 		}
+
 		#endregion
 		#region Timer Tick Region
 		private void Timer_GetData_Tick(object sender, EventArgs e)
@@ -275,6 +330,7 @@ namespace TimeHelper
 		{
 			bool OpenSuccess = false;
 			OpenSuccess = OpenSettingConfig();
+			OpenTodo();
 			if(Btn_LogLoc.Text != String.Empty)
 				path = Btn_LogLoc.Text;
 			if(OpenSuccess)

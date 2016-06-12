@@ -62,5 +62,9 @@ Temporary Items
 *.manifest
 *.config
 TimeHelper/obj/Debug/TimeHelper.csproj.FileListAbsolute.txt
+<<<<<<< HEAD
 *.suo
 *.log
+=======
+*.suo
+>>>>>>> cbcedc07755543c0b49c78ffd401ed104f22df5a
