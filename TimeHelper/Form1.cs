@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 ////Using WinAPI
 using System.Runtime.InteropServices;
 using System.IO;
@@ -36,16 +37,18 @@ namespace TimeHelper
 			public bool CleanLogEnable { get; set; }
 			public int CleanLogTime { get; set; }
 			public int AutoUpdateSpeed { get; set; }
-			/**	LocLocation - 記錄檔位置
-			 *	RecordSpeed - 紀錄速度間隔 (20 sec ~ 120 sec)
-			 *  RegularEnable - 啟用定時鬧鐘
-			 *  RegularAlarmTime - 定時鬧鐘間隔
-			 *  RegularAlarmMsg - 定時鬧鐘提醒訊息
-			 *  CleanLogEnable - 定時清除記錄檔
-			 *  CleanLogTime - 保留幾天內的記錄檔
-			 *  AutoUpdateSpeed - 自動更新頻率
-			 * **/
-		}
+            public bool AutoRun { get; set; }
+            /**	LocLocation - 記錄檔位置
+             *	RecordSpeed - 紀錄速度間隔 (20 sec ~ 120 sec)
+             *  RegularEnable - 啟用定時鬧鐘
+             *  RegularAlarmTime - 定時鬧鐘間隔
+             *  RegularAlarmMsg - 定時鬧鐘提醒訊息
+             *  CleanLogEnable - 定時清除記錄檔
+             *  CleanLogTime - 保留幾天內的記錄檔
+             *  AutoUpdateSpeed - 自動更新頻率
+             *  AutoRun - 開機時自動啟動程式
+             * **/
+        }
 		public class LogData
 		{
 			//紀錄檔用的Struct
@@ -302,6 +305,19 @@ namespace TimeHelper
 				MetroFramework.MetroMessageBox.Show(this, "\n這樣子你的紀錄檔會超肥超大的哦！\n若是太常遇到這個問題，請洽開發人員，謝謝", "輸入數字太大", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
+        //開機自動執行
+        private void CB_Regist_CheckedChanged(object sender, EventArgs e)
+        {
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (CB_AutoRun.Checked)
+            {
+                rkApp.SetValue("TimeHelper", Application.ExecutablePath);
+            }
+            else
+            {
+                rkApp.DeleteValue("TimeHelper", false);
+            }
+        }
 		#endregion
 		#region Open Form Loading setting and Close Form save setting And Clean Log
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -330,7 +346,7 @@ namespace TimeHelper
 		private void SaveSettingConfig()
 		{
 			#region Parameter Detail
-			/**	LogLocation - 記錄檔位置
+            /**	LogLocation - 記錄檔位置
 			 *	RecordSpeed - 紀錄速度間隔 (20 sec ~ 120 sec)
 			 *  RegularEnable - 啟用定時鬧鐘
 			 *  RegularAlarmTime - 定時鬧鐘間隔
@@ -338,10 +354,11 @@ namespace TimeHelper
 			 *  CleanLogEnable - 定時清除記錄檔
 			 *  CleanLogTime - 保留幾天內的記錄檔
 			 *  AutoUpdateSpeed - 自動更新頻率
+             *  AutoRun - 開機時自動啟動程式
 			 * **/
-			#endregion
-			#region Setting data to JSON
-			SettingData data = new SettingData();
+            #endregion
+            #region Setting data to JSON
+            SettingData data = new SettingData();
 			data.LogLocation = Btn_LogLoc.Text;
 			data.RecordSpeed = metroTrackBar_Speed.Value;
 			data.RegularEnable = CB_RegularAlarm.Checked;
@@ -349,6 +366,8 @@ namespace TimeHelper
 			data.RegularAlarmMsg = TB_RegularAlarmMsg.Text;
 			data.CleanLogEnable = CB_CleanLog.Checked;
 			data.CleanLogTime = int.Parse(TB_CleanLog.Text);
+            data.AutoRun = CB_AutoRun.Checked;
+            //*
 			if (RB_AutoUpdateFast.Checked)
 				data.AutoUpdateSpeed = 1;
 			else
@@ -396,6 +415,7 @@ namespace TimeHelper
 						TB_RegularAlarm.Text = data.RegularAlarmTime.ToString();
 						TB_RegularAlarmMsg.Text = data.RegularAlarmMsg;
 						CB_CleanLog.Checked = data.CleanLogEnable;
+                        CB_AutoRun.Checked = data.AutoRun;
 						TB_CleanLog.Text = data.CleanLogTime.ToString();
 						lbl_DataSec.Text = data.RecordSpeed.ToString() + " 秒";
 						if (data.AutoUpdateSpeed == 1)
