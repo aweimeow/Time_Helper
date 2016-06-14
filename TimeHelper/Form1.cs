@@ -248,6 +248,7 @@ namespace TimeHelper
             System.Media.SoundPlayer myPlayer = new System.Media.SoundPlayer("Alarm01.wav");
             myPlayer.Play();
 			MetroFramework.MetroMessageBox.Show(this, ("\n現在時間是 "+DateTime.Now.ToString("tt  hh 點 mm 分")+" 摟，休息一下吧！"), TB_RegularAlarmMsg.Text,MessageBoxButtons.OK, MessageBoxIcon.Information);
+			Timer_RegularAlarm.Enabled = true;
         }
 		#endregion
 		#region InterFace Setting
