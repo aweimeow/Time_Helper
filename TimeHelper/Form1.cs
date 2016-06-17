@@ -162,14 +162,15 @@ namespace TimeHelper
 			WriteTodo(todolist);
 		}
 
-		private void CLB_TODO_ItemCheck(object sender, ItemCheckEventArgs e)
+		private void CLB_TODO_MouseUp(object sender, MouseEventArgs e)
 		{
-			foreach(object i in CLB_TODO.SelectedItems)
+			foreach (object i in CLB_TODO.Items)
 			{
-				todolist[CLB_TODO.Items.IndexOf(i)].is_done = true;
+				todolist[CLB_TODO.Items.IndexOf(i)].is_done = CLB_TODO.GetItemChecked(CLB_TODO.Items.IndexOf(i));
 			}
 			WriteTodo(todolist);
 		}
+
 		private void WriteTodo(List<TodoData> todolist)
 		{
 			String todoData = JsonConvert.SerializeObject(todolist);
@@ -258,10 +259,10 @@ namespace TimeHelper
 			//When Checked, TB will be enabled
 			TB_RegularAlarm.Enabled = CB_RegularAlarm.Checked;
 			TB_RegularAlarmMsg.Enabled = CB_RegularAlarm.Checked;
-			if(CB_RegularAlarm.Checked)
-			{
+			if (CB_RegularAlarm.Checked)
 				Timer_RegularAlarm.Enabled = true;
-			}
+			else
+				Timer_RegularAlarm.Enabled = false;
 		}
 		private void TB_RegularAlarm_TextChanged(object sender, EventArgs e)
 		{
@@ -661,8 +662,6 @@ namespace TimeHelper
 			}
 		}
 		#endregion
-
-
 
 	}
 	#region WinAPI - Get Top Windows Name
